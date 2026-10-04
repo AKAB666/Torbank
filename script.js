@@ -1,3 +1,9 @@
+const TOR_API_URL = window.TOR_API_URL || "http://localhost:3000/api";
+async function torApi(path, options={}) {
+  const r = await fetch(TOR_API_URL + path, {...options, headers:{"Content-Type":"application/json",...(options.headers||{})}});
+  if(!r.ok) throw new Error("API "+r.status);
+  return r.json();
+}
 const state = {
   balance: 125430.50,
   transactions: [
